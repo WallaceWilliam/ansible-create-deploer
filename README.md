@@ -5,7 +5,7 @@ create deploer login on remote servers
 
 create key
 
-*$ssh-keygen -t rsa -b 4096*
+*$ssh-keygen -t rsa -b 4096 -C "admin@linux-notes.org"*
 
 ### 2)
 
