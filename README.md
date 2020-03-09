@@ -2,9 +2,7 @@
 create deploer login on remote servers
 
 1)
-
 create key
-
 ssh-keygen -t rsa -b 4096
 
 2)
