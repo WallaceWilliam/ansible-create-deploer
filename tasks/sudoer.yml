@@ -1,0 +1,25 @@
+---
+
+- name: Add sudoers users to wheel group
+  user: name="{{ create_user }}"
+        state=present
+        createhome=yes
+
+- name: Allow using this user without password
+  lineinfile:
+   dest: "/etc/sudoers.d/{{ create_user }}"
+   state: present
+   create: yes
+   regexp: "^{{ create_user }}"
+   line: "{{ create_user }} ALL=(root,root) NOPASSWD:ALL"
+   validate: 'visudo -cf %s'
+
+- name: Set up authorized keys for the deployer user
+#  authorized_key: user=ansible key="{{item}}"
+#  with_file:
+#    - "{{ copy_local_key }}"
+  authorized_key:
+     user: "{{ create_user }}"
+     state: present
+     key: "{{ copy_local_key }}"
+

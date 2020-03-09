@@ -1,0 +1,14 @@
+---
+
+# Run as follows:
+# ansible-playbook sudoer.yml -e "hostname=server1" -e "ansible_user=root"
+
+- name: Server initialization
+  hosts: "{{ hostname }}"
+  become: yes
+  vars:
+   - create_user: ansible
+   - copy_local_key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa.pub') }}"
+
+  tasks:
+  - include: tasks/sudoer.yml
